@@ -17,6 +17,7 @@ class Asteroid extends MovingObject {
       vel: randomVec(DEFS['SPEED']),
       color: DEFS['COLOR'],
       radius: DEFS['RADIUS'],
+      game: options['game'],
     });
 
     // constructor(options) {

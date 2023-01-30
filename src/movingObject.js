@@ -4,6 +4,7 @@ class MovingObject {
     this.vel = options['vel'];
     this.radius = options['radius'];
     this.color = options['color'];
+    this.game = options['game'];
   }
 
   draw(ctx) {
@@ -24,6 +25,7 @@ class MovingObject {
     const [velX, velY] = this.vel;
     this.pos[0] += velX;
     this.pos[1] += velY;
+    this.pos = this.game.wrap(this.pos);
   }
 }
 
