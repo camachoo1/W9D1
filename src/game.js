@@ -6,9 +6,10 @@ const SETTINGS = {
   NUM_ASTEROIDS: 15,
 };
 class Game {
-  constructor() {
+  constructor(ctx) {
     this.asteroids = [];
     this.addAsteroids();
+    this.ctx = ctx;
   }
 
   start() {
@@ -25,15 +26,18 @@ class Game {
   addAsteroids() {
     for (let i = 0; i < SETTINGS['NUM_ASTEROIDS']; i++) {
       this.asteroids.push(
-        new Asteroid({ pos: this.randomPosition(), game: this })
+        new Asteroid({ pos: this.randomPosition() })
       );
     }
   }
 
-  draw(ctx) {
-    ctx.clearRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);
-    ctx.fillStyle('black');
-    ctx.fillRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);
+  draw() {
+    this.ctx.clearRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);
+    this.ctx.fillStyle = 'black';
+    this.ctx.fillRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);
+    this.asteroids.forEach((asteroid) => {
+      asteroid.draw(this.ctx);
+    });
   }
 
   moveObjects() {

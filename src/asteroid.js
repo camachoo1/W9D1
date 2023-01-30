@@ -1,19 +1,37 @@
 import MovingObject from './movingObject';
-import * as Utils from './utils.js';
+import { randomVec, scale } from './util';
 
 const DEFS = {
-  COLOR: 'grey',
+  COLOR: 'white',
   RADIUS: 20,
   SPEED: 5,
 };
+
 class Asteroid extends MovingObject {
+  // static COLOR = 'grey';
+  // static RADIUS = 25;
+  // static SPEED = 5;
   constructor(options) {
-    MovingObject.call(this, {
+    super({
       pos: options['pos'],
-      vel: Utils.randomVec(DEFS['SPEED']),
+      vel: randomVec(DEFS['SPEED']),
       color: DEFS['COLOR'],
       radius: DEFS['RADIUS'],
     });
+
+    // constructor(options) {
+    //   super({
+    //     pos: options['pos'],
+    //     vel: randomVec('SPEED'),
+    //     color: 'COLOR',
+    //     radius: 'RADIUS',
+    //   });
+    // MovingObject.call(this, {
+    //   pos: options['pos'],
+    //   vel: Utils.randomVec(DEFS['SPEED']),
+    //   color: DEFS['COLOR'],
+    //   radius: DEFS['RADIUS'],
+    // });
   }
 }
 
