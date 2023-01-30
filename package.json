@@ -4,7 +4,7 @@
   "description": "In this practice, you will implement the classic game Asteroids.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
