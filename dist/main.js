@@ -16,7 +16,7 @@
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass Asteroid {\n  constructor(size) {\n    this.size = size;\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Asteroid);\n\n\n//# sourceURL=webpack://w9d1/./src/asteroid.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _movingObject__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./movingObject */ \"./src/movingObject.js\");\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n\n\n\nconst DEFS = {\n  COLOR: 'grey',\n  RADIUS: 20,\n  SPEED: 5,\n};\nclass Asteroid extends _movingObject__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  constructor(options) {\n    _movingObject__WEBPACK_IMPORTED_MODULE_0__[\"default\"].call(this, {\n      pos: options['pos'],\n      vel: _utils_js__WEBPACK_IMPORTED_MODULE_1__.randomVec(DEFS['SPEED']),\n      color: DEFS['COLOR'],\n      radius: DEFS['RADIUS'],\n    });\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Asteroid);\n\n\n//# sourceURL=webpack://w9d1/./src/asteroid.js?");
 
 /***/ }),
 
@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _asteroid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\n\n\nclass Game {\n  constructor() {\n    this.asteroid = new _asteroid__WEBPACK_IMPORTED_MODULE_0__[\"default\"](4);\n  }\n\n  start() {\n    console.log('The game is starting...');\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);\n\n\n//# sourceURL=webpack://w9d1/./src/game.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _asteroid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\n\n\nconst SETTINGS = {\n  DIM_X: 800,\n  DIM_Y: 580,\n  NUM_ASTEROIDS: 15,\n};\nclass Game {\n  constructor() {\n    this.asteroids = [];\n    this.addAsteroids();\n  }\n\n  start() {\n    console.log('The game is starting...');\n  }\n\n  randomPosition() {\n    return [\n      Math.floor(Math.random() * SETTINGS['DIM_X']),\n      Math.floor(Math.random() * SETTINGS['DIM_Y']),\n    ];\n  }\n\n  addAsteroids() {\n    for (let i = 0; i < SETTINGS['NUM_ASTEROIDS']; i++) {\n      this.asteroids.push(\n        new _asteroid__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({ pos: this.randomPosition(), game: this })\n      );\n    }\n  }\n\n  draw(ctx) {\n    ctx.clearRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);\n    ctx.fillStyle('black');\n    ctx.fillRect(0, 0, SETTINGS['DIM_X'], SETTINGS['DIM_Y']);\n  }\n\n  moveObjects() {\n    this.asteroids.forEach((obj) => obj.move());\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);\n\n\n//# sourceURL=webpack://w9d1/./src/game.js?");
 
 /***/ }),
 
@@ -36,7 +36,27 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const game = new _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  console.log(game);\n  // window.game = game\n\n  const canvas = document.getElementById('canvas');\n  const ctx = canvas.getContext('2d');\n  // console.log(ctx);\n  ctx.fillStyle = 'black';\n  ctx.fillRect(0, 0, 800, 580);\n\n  ctx.fillStyle = 'white';\n  ctx.fillRect(50, 50, 50, 50);\n\n  ctx.arc(100, 100, 50, 0, Math.PI * 2, false);\n  ctx.strokeStyle = 'green';\n  ctx.lineWidth = 20;\n  ctx.fillstyle = 'white';\n  ctx.stroke();\n  ctx.fill();\n});\n\n\n//# sourceURL=webpack://w9d1/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ \"./src/game.js\");\n/* harmony import */ var _movingObject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movingObject.js */ \"./src/movingObject.js\");\n\n\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const game = new _game__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  console.log(game);\n  // window.game = game\n\n  window.MovingObject = _movingObject_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\n\n  const canvas = document.getElementById('canvas');\n  const ctx = canvas.getContext('2d');\n  // console.log(ctx);\n  ctx.fillStyle = 'black';\n  ctx.fillRect(0, 0, 800, 580);\n\n  // ctx.fillStyle = 'white';\n  // ctx.fillRect(50, 50, 50, 50);\n\n  // ctx.arc(100, 100, 50, 0, Math.PI * 2, false);\n  // ctx.strokeStyle = 'green';\n  // ctx.lineWidth = 20;\n  // ctx.fillstyle = 'white';\n  // ctx.stroke();\n  // ctx.fill();\n});\n\n\n//# sourceURL=webpack://w9d1/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/movingObject.js":
+/*!*****************************!*\
+  !*** ./src/movingObject.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nclass MovingObject {\n  constructor(options) {\n    this.pos = options['pos'];\n    this.vel = options['vel'];\n    this.radius = options['radius'];\n    this.color = options['color'];\n    // this.game = options['game'];\n  }\n\n  draw(ctx) {\n    ctx.beginPath();\n    ctx.arc(this.pos[0], this.pos[1], this.radius, Math.PI * 2, true);\n    ctx.fillStyle(this.color);\n    ctx.fill();\n  }\n\n  move() {\n    const [velX, velY] = this.vel;\n    this.pos[0] += velX;\n    this.pos[1] += velY;\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MovingObject);\n\n\n//# sourceURL=webpack://w9d1/./src/movingObject.js?");
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst Utils = {\n  randomVec: function (length) {\n    const deg = 2 * Math.PI * Math.random();\n    return scale([Math.sin(deg), Math.cos(deg)], length);\n  },\n\n  scale: function (vec, m) {\n    return [vec[0] * m, vec[1] * m];\n  },\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Utils);\n\n\n//# sourceURL=webpack://w9d1/./src/utils.js?");
 
 /***/ })
 
