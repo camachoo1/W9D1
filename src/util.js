@@ -1,11 +1,12 @@
-// Return a randomly oriented vector with the given length.
 export const randomVec = (length) => {
   const deg = 2 * Math.PI * Math.random();
   return scale([Math.sin(deg), Math.cos(deg)], length);
 };
 
-// Scale the length of a vector by the given amount.
 export const scale = (vec, m) => {
   return [vec[0] * m, vec[1] * m];
 };
-// export default Util;
+
+export const distBetweenTwoPoints = ([x_1, y_1], [x_2, y_2]) => {
+  return Math.sqrt((x_1 - x_2) ** 2 + (y_1 - y_2) ** 2);
+};

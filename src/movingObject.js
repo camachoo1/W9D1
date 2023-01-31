@@ -1,3 +1,4 @@
+import { distBetweenTwoPoints } from './util';
 class MovingObject {
   constructor(options) {
     this.pos = options['pos'];
@@ -5,6 +6,8 @@ class MovingObject {
     this.radius = options['radius'];
     this.color = options['color'];
     this.game = options['game'];
+    this.isCollidedWith = this.isCollidedWith.bind(this);
+    this.collideWith = this.collideWith.bind(this);
   }
 
   draw(ctx) {
@@ -26,6 +29,23 @@ class MovingObject {
     this.pos[0] += velX;
     this.pos[1] += velY;
     this.pos = this.game.wrap(this.pos);
+  }
+
+  isCollidedWith(otherObj) {
+    console.log(otherObj);
+    const radiiSum = this.radius + otherObj.radius;
+
+    return distBetweenTwoPoints(this.pos, otherObj.pos) < radiiSum
+      ? true
+      : false;
+  }
+
+  collideWith(otherObj) {
+    if (this.isCollidedWith(otherObj)) {
+      this.game.remove(this);
+      this.game.remove(otherObj);
+      alert('COLLISION');
+    }
   }
 }
 

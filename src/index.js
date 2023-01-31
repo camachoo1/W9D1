@@ -10,19 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.MovingObject = MovingObject;
 
   window.ctx = ctx;
-  // console.log(ctx);
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, 800, 580);
   const gameView = new GameView(ctx);
   window.gameView = gameView;
-  // gameView.start();
-  // ctx.fillStyle = 'white';
-  // ctx.fillRect(50, 50, 50, 50);
-
-  // ctx.arc(100, 100, 50, 0, Math.PI * 2, false);
-  // ctx.strokeStyle = 'green';
-  // ctx.lineWidth = 20;
-  // ctx.fillstyle = 'white';
-  // ctx.stroke();
-  // ctx.fill();
 });

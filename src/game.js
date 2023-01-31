@@ -1,15 +1,18 @@
 import Asteroid from './asteroid';
+import MovingObject from './movingObject';
 
 const SETTINGS = {
   DIM_X: 800,
   DIM_Y: 580,
-  NUM_ASTEROIDS: 20,
+  NUM_ASTEROIDS: 4,
 };
 class Game {
   constructor(ctx) {
     this.asteroids = [];
     this.addAsteroids();
     this.ctx = ctx;
+    this.step = this.step.bind(this);
+    this.draw = this.draw.bind(this);
   }
 
   start() {
@@ -58,6 +61,34 @@ class Game {
       posY = 0;
     }
     return [posX, posY];
+  }
+
+  checkCollisions() {
+    for (let i = 0; i < this.allObjects().length - 1; i++) {
+      for (let j = i + 1; j < this.allObjects().length; j++) {
+        let firstObj = this.allObjects()[i];
+        let secondObj = this.allObjects()[j];
+        if (firstObj.isCollidedWith(secondObj)) {
+          firstObj.collideWith(secondObj);
+        }
+      }
+    }
+  }
+
+  step() {
+    this.moveObjects();
+    this.checkCollisions();
+  }
+
+  allObjects() {
+    return this.asteroids;
+  }
+
+  remove(asteroid) {
+    if (asteroid instanceof Asteroid) {
+      const asteroidIdx = this.asteroids.indexOf(asteroid);
+      this.asteroids.splice(asteroidIdx, 1);
+    }
   }
 }
 
